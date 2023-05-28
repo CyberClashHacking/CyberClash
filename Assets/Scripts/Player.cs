@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public enum State
+    {
+        Move,
+        Attack
+    }
+
+    public State state { get; set; }
+
     public static Player Instance { get { return instance; } }
-    public Rigidbody2D rigidbody { get; private set; }
+    public Rigidbody2D pRigidbody { get; private set; }
     public Animator animator { get; private set; }
     public PlayerController controller { get; private set; }
 
@@ -25,7 +33,7 @@ public class Player : MonoBehaviour
         {
             instance = this;
             animator = GetComponent<Animator>();
-            rigidbody = GetComponent<Rigidbody2D>();
+            pRigidbody = GetComponent<Rigidbody2D>();
             controller = GetComponent<PlayerController>();
 
             DontDestroyOnLoad(gameObject);
@@ -46,7 +54,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         // 플레이어 속도에 입력받은 x 값과 원래 가지고 있던 y값을 넣어줌
-        Instance.rigidbody.velocity = new Vector2(controller.inputVec.x, Instance.rigidbody.velocity.y);
+        Instance.pRigidbody.velocity = new Vector2(controller.inputVec.x, Instance.pRigidbody.velocity.y);
     }
 
     public void UpdateStat(float _maxHp, float _currentHp, float _moveSpeed, float _jumpPower, int _maxJumpCount)

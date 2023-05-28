@@ -90,9 +90,9 @@ public class PlayerController : MonoBehaviour
 
         if(_jumpCount < Player.Instance.maxJumpCount)
         {
-            Player.Instance.rigidbody.velocity = new Vector2(Player.Instance.rigidbody.velocity.x, 0);
+            Player.Instance.pRigidbody.velocity = new Vector2(Player.Instance.pRigidbody.velocity.x, 0);
             // Jump키 입력 시 순간적으로 y축에 힘을 가함
-            Player.Instance.rigidbody.AddForce(Vector2.up * Player.Instance.jumpPower, ForceMode2D.Impulse);
+            Player.Instance.pRigidbody.AddForce(Vector2.up * Player.Instance.jumpPower, ForceMode2D.Impulse);
         }
 
     }
@@ -102,7 +102,6 @@ public class PlayerController : MonoBehaviour
         if (!_isAttack)
         {
             _isAttack = true;
-            Player.Instance.animator.SetTrigger("BasicAttack1");
             StopCoroutine(BasicAttack());
             StartCoroutine(BasicAttack());
         }
@@ -111,6 +110,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator BasicAttack()
     {
+        Player.Instance.animator.SetTrigger("BasicAttack1");
         yield return new WaitForSeconds(MIN_ATTACK_DELAY);
         _isAttack = false;
     }
