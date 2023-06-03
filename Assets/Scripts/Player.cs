@@ -7,7 +7,8 @@ public class Player : MonoBehaviour
     public enum State
     {
         Move,
-        Attack
+        Attack,
+        Damage
     }
 
     public State state { get; set; }
@@ -53,8 +54,9 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // 플레이어 속도에 입력받은 x 값과 원래 가지고 있던 y값을 넣어줌
-        Instance.pRigidbody.velocity = new Vector2(controller.inputVec.x, Instance.pRigidbody.velocity.y);
+        if(Instance.state != State.Damage)
+            // 플레이어 속도에 입력받은 x 값과 원래 가지고 있던 y값을 넣어줌
+            Instance.pRigidbody.velocity = new Vector2(controller.inputVec.x, Instance.pRigidbody.velocity.y);
     }
 
     public void UpdateStat(float _maxHp, float _currentHp, float _moveSpeed, float _jumpPower, int _maxJumpCount)

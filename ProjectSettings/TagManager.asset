@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Platform
+  - Wall
+  - Enemy
+  - Skill
   layers:
   - Default
   - TransparentFX
@@ -13,8 +16,8 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
-  - 
+  - Enemy
+  - Skill
   - 
   - 
   - 
@@ -45,6 +48,15 @@ TagManager:
   - name: Background
     uniqueID: 2166664443
     locked: 0
+  - name: Platfrom
+    uniqueID: 3502578119
+    locked: 0
+  - name: Monster
+    uniqueID: 3483981637
+    locked: 0
   - name: Player
     uniqueID: 802393685
+    locked: 0
+  - name: Skill
+    uniqueID: 134886875
     locked: 0

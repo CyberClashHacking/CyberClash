@@ -27,7 +27,9 @@ public class PlayerController : MonoBehaviour
     private bool _isAttack = false;
     private bool _isAttackCall = false;
 
-    
+    public GameObject p_attack1_prefab;
+
+
 
     //private void Update()
     //{
@@ -39,9 +41,11 @@ public class PlayerController : MonoBehaviour
         // 충돌한 오브젝트의 태그가 Platform일 경우..
         if (collision.gameObject.tag == "Platform")
         {
+            //Debug.Log("enter");
             // 충돌한 오브젝트의 노말벡터 값이 0.7 이상인 경우 윗면이라고 판단
             if (collision.contacts[0].normal.y > 0.7f)
             {
+                //Debug.Log("enter_top");
                 _isJump = false;
                 _jumpCount = 0;
                 Player.Instance.animator.SetBool("isJump", _isJump);
@@ -53,6 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Platform")
         {
+            Debug.Log("exit");
             _isJump = true;
             Player.Instance.animator.SetBool("isJump", _isJump);
         }
@@ -111,7 +116,11 @@ public class PlayerController : MonoBehaviour
     IEnumerator BasicAttack()
     {
         Player.Instance.animator.SetTrigger("BasicAttack1");
+        float xPlus = (transform.rotation.y < 0) ? -1 : 1;
+        Vector3 p_attack1_position = new Vector3(transform.position.x+xPlus, transform.position.y-0.4f);
+        GameObject p_attack1 = Instantiate(p_attack1_prefab, p_attack1_position, transform.rotation);
         yield return new WaitForSeconds(MIN_ATTACK_DELAY);
+        Destroy(p_attack1);
         _isAttack = false;
     }
 }

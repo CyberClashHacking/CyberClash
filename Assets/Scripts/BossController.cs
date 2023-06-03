@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-    public GameObject player, bulletPrefab, attackPrefab;
+    public GameObject player, bulletPrefab;
     private Rigidbody2D rb;
     int i = 1;
     public int pattern_delay = 3;
@@ -42,7 +42,7 @@ public class BossController : MonoBehaviour
             Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);
             foreach (Collider2D collider2D in collider2Ds)
             {
-                if (collider2D.tag == "Ground" || collider2D.tag == "Player")
+                if (collider2D.tag == "Platform" || collider2D.tag == "Player")
                 {
                     b = true;
                     nextPattern();
